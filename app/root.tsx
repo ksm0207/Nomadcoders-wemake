@@ -8,8 +8,10 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "./app.css";
+//import "./app.css";
+import stylesheet from "app/app.css?url"; //Vite에서 제공하는 기능
 
+console.log("테스트 : ",stylesheet);
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -21,8 +23,13 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  {
+    rel: "stylesheet",
+    href: stylesheet,
+  },
 ];
 
+// 레이아웃 컴포넌트
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -30,11 +37,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
-        <Links />
+        <Links /> 
       </head>
       <body>
         {children}
-        <ScrollRestoration />
+        <ScrollRestoration /> {/* 스크롤 위치 복원 컴포넌트 / 페이지 이동 했다가 이전 페이지로 돌아갈때 스크롤 위치를 복원해줌 */}
         <Scripts />
       </body>
     </html>
@@ -42,9 +49,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return <Outlet />; // URL에 따라 렌더링되는 컴포넌트
 }
 
+// 에러 처리 컴포넌트
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
