@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 //import "./app.css";
 import stylesheet from "app/app.css?url"; //Vite에서 제공하는 기능
+import Navigation from "./common/components/navigation";
 
 console.log("테스트 : ",stylesheet);
 export const links: Route.LinksFunction = () => [
@@ -40,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links /> 
       </head>
       <body>
+        {/*<Navigation/>  에러페이지(바운더리) 에서도 네비게이션 컴포넌트 사용하고싶으면 여기에.. */}
         {children}
         <ScrollRestoration /> {/* 스크롤 위치 복원 컴포넌트 / 페이지 이동 했다가 이전 페이지로 돌아갈때 스크롤 위치를 복원해줌 */}
         <Scripts />
@@ -49,7 +51,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />; // URL에 따라 렌더링되는 컴포넌트
+  return (
+    <>
+      <Navigation/> {/* 네비게이션 컴포넌트 */}
+      <Outlet/> {/* 현재 라우트에 따라 렌더링되는 컴포넌트 */}
+    </>
+  )
+  
 }
 
 // 에러 처리 컴포넌트

@@ -6,7 +6,8 @@ import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 
 export default defineConfig({
-  plugins: [reactRouter(), tsconfigPaths(), react()],
+  // plugins: [reactRouter(), tsconfigPaths(), react()],
+  plugins: [reactRouter(), tsconfigPaths()],
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer],
